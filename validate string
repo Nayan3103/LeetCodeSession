@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isValid(String s) {
+        if(s=="" || s==null) return false;
+        if(s.charAt(0)==')' || s.charAt(0)==']' || s.charAt(0)=='}') return false;
+        Stack st = new Stack();
+        for(int i=0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if(c=='{' || c=='(' || c=='['){
+                st.push(c);
+            } else {
+                 if(st.isEmpty()) return false;
+                boolean found = true;
+                if(((char)st.peek()=='{' && c=='}') || ((char)st.peek()=='(' && c==')') || ( (char)st.peek()=='[' && c==']')) {
+                st.pop();
+                    found = false;
+            }
+                if(found) return false;
+            }
+        }
+        if(st.isEmpty()) return true;
+        return false;
+    }
+}
